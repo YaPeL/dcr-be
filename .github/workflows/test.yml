@@ -31,4 +31,4 @@ jobs:
     - name: Test with pytest
       run: |
         pip3 install -r test-requirements.txt
-        pytest tests/
+        pytest app/
