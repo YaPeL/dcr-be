@@ -54,7 +54,7 @@ To stop it:
 it's like flask, but support async/await out of the box, and I always wanted to try it out, I like it :)
 
 ## docs
-visit http://localhost:5000/docs#/ for some (incomplete docWs)
+visit http://localhost:5000/docs#/
 
 ## Future plans, what is missing 
 * Currently, I generate the nearby points using heuristics, a better approach would be to rip all the valid points from the original project,
