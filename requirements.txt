@@ -1,0 +1,4 @@
+aiogmaps==0.0.2
+googlemaps==4.4.5
+haversine==2.3.0
+ptvsd==4.2.10
