@@ -12,7 +12,7 @@ ________                               _________                _____.__        
         \/     \/_____/            \/          \/            \/                      \/     \/     \/    \/          \/     \/    \/                     \/          \/     \/     \/     \/    \/     \/     \/ 
 
 
-</pre>>
+</pre>
 
 ## Configuration
 
@@ -50,6 +50,9 @@ To stop it:
   pip install -r test-requirements.txt
   pytest app/
 ```
+## Why FastApi
+it's like flask, but support async/await out of the box, and I always wanted to try it out, I like it :)
+
 
 ## Future plans, what is missing 
 * Currently, I generate the nearby points using heuristics, a better approach would be to rip all the valid points from the original project,
