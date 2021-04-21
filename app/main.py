@@ -6,7 +6,7 @@ from json.decoder import JSONDecodeError
 from pydantic import ValidationError
 import ptvsd
 
-from dcr_point import DCRPoint, Point, Direction
+from dcr_point import DCRPoint, Point, Direction, Marker, Markers
 
 
 """
@@ -27,22 +27,20 @@ async def reverse(direction: Direction):
         response = await client.geocode(str(direction))
         if not response:
             raise HTTPException(status_code=404, detail=f"Direction not found: {str(direction)}")
-        return JSONResponse(content=response[0]["geometry"]["location"])
+        point = Point(**response[0]["geometry"]["location"])
+        return JSONResponse(content=point.dict())
 
 
 # TODO create response model
-@app.post("/geo/nearby")
+@app.post("/geo/nearby", response_model=Markers)
 async def nearby(point: Point):
-    response = {"markers": []}
-    try:
-        dcrp = DCRPoint(point=point)
-    except ValidationError as e:
-        raise HTTPException(status_code=400, detail=f"Bad request: {e.json()}")
+    markers = []
+    dcrp = DCRPoint(point=point)
     for point in dcrp.nearby_points():
         distance = dcrp.calculate_distance(point)
         if dcrp.point == point:
-            marker = {"infoText": f"you are here!", "position": point.dict()}
+            marker = Marker(infoText="you are here!", position=point)
         else:
-            marker = {"infoText": f"{distance} Km", "position": point.dict()}
-        response["markers"].append(marker)
-    return JSONResponse(content=response)
+            marker = Marker(infoText=f"{distance} Km", position=point)
+        markers.append(marker)
+    return JSONResponse(content=Markers(markers=markers).dict())

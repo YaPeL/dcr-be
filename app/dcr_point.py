@@ -1,6 +1,6 @@
 from pydantic import BaseModel, validator, ValidationError
 from haversine import haversine
-from typing import Generator
+from typing import Generator, List
 
 
 class Direction(BaseModel):
@@ -30,6 +30,15 @@ class Point(BaseModel):
 
     def to_tuple(self) -> tuple:
         return self.lat, self.lng
+
+
+class Marker(BaseModel):
+    infoText: str
+    position: Point
+
+
+class Markers(BaseModel):
+    markers: List[Marker]
 
 
 class DCRPoint(BaseModel):
