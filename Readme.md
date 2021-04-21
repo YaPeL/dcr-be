@@ -53,6 +53,8 @@ To stop it:
 ## Why FastApi
 it's like flask, but support async/await out of the box, and I always wanted to try it out, I like it :)
 
+## docs
+visit http://localhost:5000/docs#/ for some (incomplete docWs)
 
 ## Future plans, what is missing 
 * Currently, I generate the nearby points using heuristics, a better approach would be to rip all the valid points from the original project,
@@ -69,3 +71,4 @@ and store them in a database, probably PostGIS, benefits:
   get nearby points, get distance between points, I was aware of this from the start, but did it this way to save time
 * the infoMark text should not be coming from the backend.
 * Add metric and imperial system for distances.
+* Improve swagger documentation
