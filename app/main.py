@@ -27,8 +27,7 @@ async def reverse(direction: Direction):
         response = await client.geocode(str(direction))
         if not response:
             raise HTTPException(status_code=404, detail=f"Direction not found: {str(direction)}")
-        point = Point(**response[0]["geometry"]["location"])
-        return JSONResponse(content=point.dict())
+        return JSONResponse(content=Point(**response[0]["geometry"]["location"]).dict())
 
 
 # TODO create response model
