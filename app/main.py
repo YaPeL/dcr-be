@@ -20,16 +20,17 @@ if os.getenv('ENVIRONMENT', 'PROD') != 'PROD':
 app = FastAPI()
 
 
-@app.post("/geo/reverse")
+@app.post("/geo/reverse", response_model=Point)
 async def reverse(direction: Direction):
     api_key = os.getenv('GMAP_API_KEY', None)
     async with Client(api_key) as client:
         response = await client.geocode(str(direction))
         if not response:
             raise HTTPException(status_code=404, detail=f"Direction not found: {str(direction)}")
-        return JSONResponse(content=Point(**response[0]["geometry"]["location"]))
+        return JSONResponse(content=response[0]["geometry"]["location"])
 
 
+# TODO create response model
 @app.post("/geo/nearby")
 async def nearby(point: Point):
     response = {"markers": []}
