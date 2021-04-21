@@ -8,7 +8,7 @@ def test_nearby_empty_params():
     response = client.post(
         "/geo/nearby",
     )
-    assert response.status_code == 400
+    assert response.status_code == 422
 
 
 def test_nearby_invalid_params():
@@ -16,7 +16,7 @@ def test_nearby_invalid_params():
         "/geo/nearby",
         json={"lat": 999, "lng": 999},
     )
-    assert response.status_code == 400
+    assert response.status_code == 422
 
 
 def test_nearby_missing_params():
@@ -24,7 +24,7 @@ def test_nearby_missing_params():
         "/geo/nearby",
         json={"lat": -37},
     )
-    assert response.status_code == 400
+    assert response.status_code == 422
 
 
 def test_nearby_ok_params():
