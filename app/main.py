@@ -26,8 +26,8 @@ async def reverse(direction: Direction):
     async with Client(api_key) as client:
         response = await client.geocode(str(direction))
         if not response:
-            raise HTTPException(status_code=404, detail=f"Direction not found: {str(d)}")
-        return JSONResponse(content=response[0]["geometry"]["location"])
+            raise HTTPException(status_code=404, detail=f"Direction not found: {str(direction)}")
+        return JSONResponse(content=Point(**response[0]["geometry"]["location"]))
 
 
 @app.post("/geo/nearby")
