@@ -30,9 +30,8 @@ async def reverse(direction: Direction):
         return JSONResponse(content=Point(**response[0]["geometry"]["location"]).dict())
 
 
-# TODO create response model
 @app.post("/geo/nearby", response_model=Markers)
-async def nearby(point: Point):
+def nearby(point: Point):
     markers = []
     dcrp = DCRPoint(point=point)
     for point in dcrp.nearby_points():
